@@ -1,0 +1,90 @@
+LLM 微调学习大纲
+
+Phase 1：基础流程（跑通端到端）— ✅ 已完成
+01
+• 主题: 环境搭建（conda + ms-swift + torch）
+• 状态: ✅
+
+02
+• 主题: SFT 基本命令 + 核心参数理解
+• 状态: ✅
+
+03
+• 主题: 训练产出物解读（checkpoint、曲线、日志）
+• 状态: ✅
+
+04
+• 主题: 推理验证（swift infer + 纯 Python）
+• 状态: ✅
+
+05
+• 主题: 踩坑实战：Base vs Instruct、停止标记、环境依赖
+• 状态: ✅
+
+Phase 2：数据工程
+06
+• 主题: 数据集格式（Alpaca / Messages / Query-Response）
+• 状态: ✅ 已接触
+
+07
+• 主题: 自定义数据集制作 + 数据质量原则
+• 状态: pending
+
+08
+• 主题: 多数据集配比策略（防遗忘 vs 专项能力）
+• 状态: pending
+
+09
+• 主题: 数据清洗与去重
+• 状态: pending
+
+Phase 3：LoRA 原理与调优
+10
+• 主题: LoRA 数学原理（低秩分解）
+• 状态: pending
+
+11
+• 主题: 关键参数调优（rank / alpha / target_modules / dropout）
+• 状态: pending
+
+12
+• 主题: QLoRA（4-bit 量化 + LoRA，跑更大模型）
+• 状态: pending
+
+13
+• 主题: 过拟合诊断与对策（验证集、early stopping）
+• 状态: pending
+
+Phase 4：训练深入
+14
+• 主题: 学习率策略（warmup、cosine、对 loss 的影响）
+• 状态: pending
+
+15
+• 主题: Gradient Accumulation / Checkpointing 原理
+• 状态: pending
+
+16
+• 主题: 训练曲线深度解读（异常模式识别）
+• 状态: pending
+
+17
+• 主题: 多轮对话微调（chat template 深入）
+• 状态: pending
+
+Phase 5：部署与进阶
+18
+• 主题: LoRA 合并与模型导出
+• 状态: pending
+
+19
+• 主题: vLLM / TGI 部署推理服务
+• 状态: pending
+
+20
+• 主题: 模型评估（benchmark + 人工评测）
+• 状态: pending
+
+21
+• 主题: DPO / RLHF 概念入门
+• 状态: pending

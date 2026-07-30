@@ -1,0 +1,30 @@
+# 模型权重（体积大，通过独立渠道管理）
+models/
+
+# 训练数据集缓存
+datasets/
+lockers/
+
+# 训练输出（checkpoint、日志、tensorboard）
+output/
+
+# swift web ui
+swift-web-ui/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# 数据文件
+*.jsonl
+
+# IDE / 工具目录
+.idea/
+.omc/
+.lock/
+
+# 系统文件
+.DS_Store
