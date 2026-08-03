@@ -10,8 +10,8 @@ import os
 from openai import OpenAI
 
 client = OpenAI(
-    base_url="https://ai-service.tal.com/v1",
-    api_key=os.getenv("TAL_API_KEY", "your-key-here")
+    base_url="http://ai-service.tal.com/openai-compatible/v1",
+    api_key="*"
 )
 
 SYSTEM_PROMPT = "你是一名专业的在线教育平台客服，负责解答学员和家长的咨询。\n你的职责包括：课程介绍、报名流程指引、学习问题答疑、退费政策说明、技术问题排查。\n要求：态度友善专业，回答简洁清晰，必要时主动询问以精准定位问题。"
@@ -79,7 +79,11 @@ def generate_one_batch(batch_size=5):
 
 
 def to_dpo_format(item):
-    """转换为 swift DPO 训练格式"""
+    """转换为 swift DPO 训练格式
+
+    swift 4.4.x 要求：chosen response 放在 messages 最后一条，
+    rejected 用 rejected_response 字段（字符串）表示。
+    """
     messages = [{"role": "system", "content": SYSTEM_PROMPT}]
 
     # 添加历史上下文
@@ -88,18 +92,19 @@ def to_dpo_format(item):
 
     # 添加用户最新问题
     messages.append({"role": "user", "content": item["question"]})
+    # chosen response 作为 messages 最后一条
+    messages.append({"role": "assistant", "content": item["chosen"]})
 
     return {
         "messages": messages,
-        "chosen": [{"role": "assistant", "content": item["chosen"]}],
-        "rejected": [{"role": "assistant", "content": item["rejected"]}],
+        "rejected_response": item["rejected"],
         "reject_reason": item.get("reject_reason", "")
     }
 
 
 def dedup_key(item):
-    """用 messages + chosen 做去重 key"""
-    raw = json.dumps(item["messages"], ensure_ascii=False) + item["chosen"][0]["content"]
+    """用 messages 做去重 key（messages 最后一条即 chosen response）"""
+    raw = json.dumps(item["messages"], ensure_ascii=False)
     return hashlib.md5(raw.encode()).hexdigest()
 
 

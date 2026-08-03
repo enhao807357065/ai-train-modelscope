@@ -1,0 +1,43 @@
+base_model: models/Qwen--Qwen2.5-0.5B-Instruct/snapshots/master
+gate_mode: cheap_embed
+dtype: bfloat16
+experts_per_token: 2
+
+shared_experts:
+  - source_model: models/Qwen--Qwen2.5-0.5B-Instruct/snapshots/master
+    positive_prompts:
+      - "你好，介绍一下你自己"
+      - "今天天气怎么样"
+      - "帮我写一首诗"
+
+experts:
+  - source_model: output/moe-exp-cs-final
+    positive_prompts:
+      - "我要退款，请问怎么操作"
+      - "课程怎么报名？有优惠吗"
+      - "我要投诉，昨天客服态度很差"
+      - "孩子的课程进度在哪里看"
+      - "退费政策是什么"
+    negative_prompts:
+      - "用Python写一个快速排序"
+      - "解释一下什么是量子计算"
+
+  - source_model: output/moe-exp-code-merged
+    positive_prompts:
+      - "用Python实现二分查找"
+      - "这段代码有什么bug"
+      - "写一个函数计算斐波那契数列"
+      - "解释Python的装饰器怎么用"
+      - "如何用pandas读取csv文件"
+    negative_prompts:
+      - "我要退款"
+      - "课程怎么报名"
+
+  - source_model: models/Qwen--Qwen2.5-0.5B-Instruct/snapshots/master
+    positive_prompts:
+      - "什么是量子计算"
+      - "中国的首都是哪里"
+      - "解释一下相对论"
+    negative_prompts:
+      - "我要退款"
+      - "写Python代码"

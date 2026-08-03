@@ -1,9 +1,9 @@
 from openai import OpenAI
 client = OpenAI(base_url="http://localhost:8000/v1", api_key="empty")
 resp = client.chat.completions.create(
-    model="./output/v4-20260727-171700/checkpoint-282-merged",
+    model="output/final-merged",
     messages=[{"role": "system", "content": "you are a helpful assistant"},
-              {"role": "user", "content": "快递能不能退？"}],
+              {"role": "user", "content": "我找不到我的课程在什么地方"}],
     temperature=0
 )
 print(f"\n response: {resp}")
